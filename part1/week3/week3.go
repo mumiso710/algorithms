@@ -22,7 +22,7 @@ func quickSort(a []int, l int, r int) (compNum int) {
 		return 0
 	}
 	compNum = r - l
-	i := choosePivoit(a, l, r)
+	i := choosePivot(a, l, r)
 	a[l], a[i] = a[i], a[l]
 	j := partition(a, l, r)
 	compNum += quickSort(a, l, j - 1)
@@ -32,7 +32,7 @@ func quickSort(a []int, l int, r int) (compNum int) {
 }
 
 // We choose first element of array as pivot
-func choosePivoit(a []int, l int, r int) (pivot int) {
+func choosePivot(a []int, l int, r int) (pivot int) {
 	return l
 }
 
