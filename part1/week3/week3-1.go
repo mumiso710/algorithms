@@ -11,7 +11,7 @@ import (
 const arraySize = 10000
 
 func main() {
-	a := readFileAndMakeArray("test.txt")
+	a := readFileAndMakeArray("quicksort.txt")
 	ans := quickSort(a, 0, len(a) - 1)
 	fmt.Println(ans)
 
@@ -22,6 +22,7 @@ func quickSort(a []int, l int, r int) (compNum int) {
 		return 0
 	}
 	compNum = r - l
+	//fmt.Println("l:", l, "r:", r)
 	i := choosePivot(a, l, r)
 	a[l], a[i] = a[i], a[l]
 	j := partition(a, l, r)
@@ -50,7 +51,7 @@ func partition(a []int, l int, r int) (int) {
 }
 
 func readFileAndMakeArray(name string) (xs []int) {
-	xs = make([]int, arraySize)
+	xs = make([]int, 0, arraySize)
 	f, err := os.Open(name)
 	if err != nil {
 		log.Fatalln(err)
