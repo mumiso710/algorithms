@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -32,9 +33,26 @@ func quickSort(a []int, l int, r int) (compNum int) {
 	return compNum
 }
 
-// We choose first element of array as pivot
+// We choose first element of array as pivot Q.1
+// We choose last element of array as pivot Q.2
+// We choose median element in first mid last as pivot Q.3
 func choosePivot(a []int, l int, r int) (pivot int) {
-	return l
+	arr := make([]int ,3, 3)
+	m := make(map[int]int)
+	first := l
+	last := r
+	mid := (first + last) / 2
+	m[a[first]] = first
+	m[a[last]] = last
+	m[a[mid]] = mid
+	arr[0] = a[first]
+	arr[1] = a[last]
+	arr[2] = a[mid]
+	sort.Ints(arr)
+	return m[arr[1]]
+	//return l
+	//return r
+
 }
 
 func partition(a []int, l int, r int) (int) {
