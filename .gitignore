@@ -50,4 +50,4 @@ builds/**/images/*
 *.pem
 *.xxjson
 
-
+slides
