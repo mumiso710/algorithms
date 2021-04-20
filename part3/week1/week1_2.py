@@ -9,6 +9,7 @@ class Job:
 def readFileAndReturnJobsArray(fileName):
     file = open(fileName, 'r')
     lines = file.read().splitlines()
+    file.close()
     # line1: Number of Jobs
     # line2,3,...: w_i l_i
     jobNumber = lines[0]
