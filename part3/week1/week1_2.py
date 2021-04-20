@@ -30,9 +30,9 @@ def calcObjectiveFunction(jobs):
 
 if __name__ == '__main__':
     jobs = readFileAndReturnJobsArray(FILENAME)
-    # sort by diff_i (w_i - l_i)
-    # if diff_i == diff_j compare w_i with w_j
-    jobs = sorted(jobs, key=lambda job: (job.diff, job.weight), reverse=True)
+    # sort by (weight / length)
+    # if (weight/length)_i == (weight/length)_j compare w_i with w_j
+    jobs = sorted(jobs, key=lambda job: (job.weight/job.length, job.weight), reverse=True)
     sumOfWeigthtedCompletionTime = calcObjectiveFunction(jobs)
     print(sumOfWeigthtedCompletionTime)
 
