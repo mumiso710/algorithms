@@ -49,9 +49,10 @@ func choosePivot(a []int, l int, r int) (pivot int) {
 	arr[1] = a[last]
 	arr[2] = a[mid]
 	sort.Ints(arr)
-	return m[arr[1]]
+	//return m[arr[1]]
 	//return l
 	//return r
+    return l
 
 }
 
