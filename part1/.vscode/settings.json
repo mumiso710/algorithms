@@ -1,0 +1,13 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "__split_buffer": "cpp",
+        "deque": "cpp",
+        "iterator": "cpp",
+        "stack": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "array": "cpp",
+        "utility": "cpp"
+    }
+}

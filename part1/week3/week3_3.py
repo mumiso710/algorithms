@@ -1,4 +1,4 @@
-FILENAME = 'quicksort.txt'
+FILENAME = 'test.txt'
 
 def readFileAndCreateArray():
     arr = []
@@ -16,6 +16,7 @@ def choosePivot(arr, l, r):
     a = [first, midle, last]
     a.sort()
     pivot = arr.index(a[1])
+    print(pivot);
     return pivot
 
 
