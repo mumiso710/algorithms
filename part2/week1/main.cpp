@@ -127,7 +127,7 @@ int main() {
     reverse(scc_size.begin(), scc_size.end());
     for (int i=0; i<5; i++) {
         cout << scc_size[i];
-        if (i != 5) cout << " ";
+        if (i != 5) cout << ",";
     }
     cout << endl;
 
