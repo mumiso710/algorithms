@@ -51,3 +51,4 @@ builds/**/images/*
 *.xxjson
 
 slides
+.vscode/settings.json
