@@ -203,7 +203,7 @@ int main () {
     // }
     for (auto pair : nodes) {
         for (int i=0; i<pair.second.size(); i++) {
-            if(uf2.unite(pair.second[0] - 1, pair.second[i] - 1)) k--;
+            if(uf2.unite(pair.second[0], pair.second[i])) k--;
         }
     }
 
@@ -213,7 +213,7 @@ int main () {
                 bitset<24> bit = pair.first ^ bitmask;
                 if (nodes.find(bit) != nodes.end()) {
                     for (int j=0; j<nodes[bit].size(); j++) {
-                        if(uf2.unite(pair.second[i]-1, nodes[bit][j]-1)) {
+                        if(uf2.unite(pair.second[i], nodes[bit][j])) {
                             k--;
                         }
                     }
@@ -221,5 +221,5 @@ int main () {
             }
         }
     }
-    cout << k - 1 << endl;
+    cout << k << endl;
 }
