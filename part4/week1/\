@@ -13,18 +13,9 @@ const string FILE_NAME3 = "g3.txt";
 typedef pair<int, int> Edge;
 typedef vector<vector<Edge> > Graph;
 
-
-void print_graph(Graph &G) {
-    for (int i = 0; i < G.size(); i++) {
-        for (int j = 0; j < G[i].size(); j++) {
-            cout << "from : " << i << " to : " << G[i][j].first << " cost : " << G[i][j].second << endl;
-        }
-    }
-}
-
-Graph make_graph(string file_name) {
+Graph make_graph() {
     ifstream file;
-    file.open(file_name, ios::in);
+    file.open(FILE_NAME1, ios::in);
     string buf;
 
     int node_num;
@@ -40,9 +31,9 @@ Graph make_graph(string file_name) {
         getline(file, buf);
         if (buf.size() != 0) {
             int from = stoi(buf.substr(0, buf.find(" "))) - 1;
-            buf = buf.substr(buf.find(" ") + 1);
+            buf = buf.substr(0, buf.find(" "));
             int to = stoi(buf.substr(0, buf.find(" "))) - 1;
-            buf = buf.substr(buf.find(" ") + 1);
+            buf = buf.substr(0, buf.find(" "));
             int cost = stoi(buf);
             G[from].push_back(make_pair(to, cost));
         }
@@ -53,15 +44,12 @@ Graph make_graph(string file_name) {
 
 }
 
-void floyd_warshall(Graph &G) {
-    return;
-}
-
 int main() {
-    Graph G1, G2, G3;
-    G1 = make_graph(FILE_NAME1);
-    G2 = make_graph(FILE_NAME2);
-    G3 = make_graph(FILE_NAME3);
-
-    floyd_warshall(G1);
+    Graph G;
+    G = make_graph();
+    for (int i = 0; i < 1; i++) {
+        for (int j = 0; j < G[i].size(); j++) {
+            cout << "from : " << i << " to : " << G[i][j].first << " cost : " << G[i][j].second << endl;
+        }
+    }
 }
