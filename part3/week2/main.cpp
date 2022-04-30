@@ -194,13 +194,6 @@ int main () {
     unordered_map<bitset<24>, vector<int> > nodes;
     nodes = make_nodes();
 
-    // for(auto pair:nodes){
-    //     cout << "num 2 : " << pair.first << " node_num : { ";
-    //     for (int i = 0; i < pair.second.size(); i++) {
-    //           cout << pair.second[i] << ",";
-    //     }
-    //     cout << " }" << endl;
-    // }
     for (auto pair : nodes) {
         for (int i=0; i<pair.second.size(); i++) {
             if(uf2.unite(pair.second[0], pair.second[i])) k--;
