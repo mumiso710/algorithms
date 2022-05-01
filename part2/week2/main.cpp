@@ -2,10 +2,12 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <queue>
 #include <utility>
 #include <sstream>
 
 using namespace std;
+typedef vector<vector<pair<int, int> > > Graph;
 
 const string FILE_NAME = "dijkstraData.txt";
 const int NODE_NUM = 200;
@@ -78,6 +80,36 @@ void dijkstra(vector<vector<pair<int, int> > > &G, int destination) {
     
 }
 
+vector<int> dijkstra_heap(Graph &G, int from) {
+    int n = G.size();
+    set<int> X;
+    vector<int> key(n);
+    vector<int> len(n, INF);
+    // pair = (key[v], v)
+    priority_queue<pair<int, int>, vector<pair<int, int> >, greater<pair<int, int> > > pq;
+    key[from] = 0;
+    for (int i=0; i<n; i++) {
+        if (i != from) key[i] = INF;
+    }
+    for (int i=0; i<n; i++) {
+        pq.push(make_pair(key[i], i));
+    }
+    while (!pq.empty()) {
+        int w = pq.top().second;
+        pq.pop();
+        if (X.find(w) != X.end()) continue;
+        X.insert(w);
+        len[w] = key[w];
+        for (pair<int, int> y : G[w]) {
+            int to = y.first;
+            int cost = y.second;
+            key[to] = min(key[to], len[w] + cost);
+            pq.push(make_pair(key[to], to));
+        }
+    }
+    return len;
+}
+
 int main() {
     vector<vector<pair<int, int> > > G = make_graph();
     // print_graph(G);
@@ -89,4 +121,16 @@ int main() {
         if (i != destinations.size()-1) cout << ",";
     }
     cout << endl;
+    vector<int> heap_len = dijkstra_heap(G, 1);
+    for (int i=0; i<destinations.size(); i++) {
+        int destination = destinations[i];
+        cout << heap_len[destination];
+        if (i != destinations.size()-1) cout << ",";
+    }
+    cout << endl;
+
+
+    //for (int i=0; i<G.size(); i++) {
+    //    cout << len[i] << " " << heap_len[i] << endl;
+    //}
 }
