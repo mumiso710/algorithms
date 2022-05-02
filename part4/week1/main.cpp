@@ -154,7 +154,7 @@ void jhonson(Graph G) {
     if (bellman_ford(G, 0, P)) {
         cout << "There is no cycle!" << endl;
         update_graph(G, P);
-        cout << "Please wait calculateing min path" << endl;
+        cout << "Please wait for calculateing min path" << endl;
         for (int i=0; i<G.size(); i++) {
             dijkstra(G, i, dist, P);
         }
