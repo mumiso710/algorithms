@@ -1,20 +1,38 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <cmath>
+#include <utility>
 
 using namespace std;
+const int INF = 1000000;
 
 const string FILE_NAME = "tsp.txt";
+//const string FILE_NAME = "test2.txt";
 
 // the position of the city <x, y>
-typedef pair<double double> city;
+typedef pair<double, double> city;
 
+int count_num_of_1bit(int n) {
+    bitset<100> bs(n);
+    return bs.count();
+}
+
+vector<int> make_1bit_indices(int n) {
+    bitset<100> bs(n);
+    vector<int> indices;
+    for (int i=0; i<100; i++) {
+        if (bs[i]) indices.push_back(i);
+    }
+    return indices;
+}
 
 vector<city> make_cities() {
 
     vector<city> cities;
 
     ifstream file;
-    file.open(file_name, ios::in);
+    file.open(FILE_NAME, ios::in);
     string buf;
 
     int city_num;
@@ -29,11 +47,63 @@ vector<city> make_cities() {
             double x = stod(buf.substr(0, buf.find(" ")));
             buf = buf.substr(buf.find(" ") + 1);
             double y = stod(buf.substr(0, buf.find(" ")));
+            cities.push_back(make_pair(x, y));
+        }
     }
+
+    file.close();
+
+    return cities;
+
+}
+
+void tsp(vector<city> &cities) {
 
 }
 
 int main() {
+    vector<city> cities = make_cities();
+    int n = cities.size();
+
+    vector<vector<double> > A((1 << n), vector<double>(n, INF));
+    vector<vector<double> > c(n, vector<double>(n));
+
+    for (int i=0; i<n; i++) {
+        for (int j=0; j<n; j++) {
+            if (i == j) c[i][j] = 0;
+            else {
+                c[i][j] = sqrt(pow(cities[i].first - cities[j].first, 2) + pow(cities[i].second - cities[j].second, 2));
+            }
+        }
+    }
+
+    
+
+    A[1][0] = 0;
+
+
+    for (int m = 2; m <= n; m++) {
+        cout << m << "/" << n << endl;
+        for (int i = 0; i < (1 << n); i++) {
+            if (count_num_of_1bit(i) != m or !(i & 1)) continue;
+            for (int j : make_1bit_indices(i)) {
+                if (j == 0) continue;
+                double min_value = INF;
+                // j番目を0にする
+                for (int k : make_1bit_indices(i & ~(1 << j))) {
+                    min_value = min(min_value, A[i & ~(1 << j)][k] + c[k][j]);
+                }
+                A[i][j] = min_value;
+            }
+        }
+    }
+
+    double ans = INF;
+    for (int i=1; i<n; i++) {
+        ans = min(ans, A[(1 << n)-1][i]+c[i][0]);
+    }
+    cout << floor(ans) << endl;
+
 
 }
 
