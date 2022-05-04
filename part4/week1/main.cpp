@@ -39,7 +39,7 @@ Graph make_graph(string file_name) {
         getline(file, buf);
         // add 1 for Jhonson's algorithm start vertex;
         node_num = stoi(buf.substr(0, buf.find(" "))) + 1;
-        buf = buf.substr(0, buf.find(" "));
+        buf = buf.substr(buf.find(" ") + 1);
         edge_num = stoi(buf);
     }
     Graph G(node_num);
