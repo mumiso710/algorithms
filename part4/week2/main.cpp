@@ -57,10 +57,6 @@ vector<city> make_cities() {
 
 }
 
-void tsp(vector<city> &cities) {
-
-}
-
 int main() {
     vector<city> cities = make_cities();
     int n = cities.size();
@@ -78,7 +74,6 @@ int main() {
     }
 
     
-
     A[1][0] = 0;
 
 
